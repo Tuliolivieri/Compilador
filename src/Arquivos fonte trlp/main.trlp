@@ -1,0 +1,11 @@
+int a;
+int b;
+float c;
+float d;
+string f;
+
+BEGIN
+    a = 10;
+    c = 12.9;
+    e = "SALVE SALVE";
+END.

@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04/03/2020, 21:43:42
+    Author     : tulio
+*/
+
+.code-area .caret{
+    -fx-stroke: white;
+}
+
+.text{
+    -fx-fill: white;
+}
+
+.code-area .lineno { /*coluna dos numeros de linhas*/
+    -fx-background-color: #304080;
+    
+}
+.code-area .lineno .text{ /*texto da coluna dos numeros de linhas*/
+    -fx-fill: lightgray;
+}
+
+.keyword{
+    -fx-fill: #FF33CC;      /*ROSA*/
+}
+
+.type{
+    -fx-fill: #00FF00;      /*VERDE*/
+}
+
+.command{
+    -fx-fill: #00FFFF;      /*AQUA*/
+}
+
+.number{
+    -fx-fill: #99FF33      /*VERDE*/
+}
+
+.semicolon{
+    -fx-fill: #FF0000;      /*VERMELHO*/
+}
+
+.paren{
+    -fx-fill: #9999FF;      /*ROXO*/
+}
+
+.brace{
+    -fx-fill: #6666FF;      /*ROXO*/
+}
+
+.bracket{
+    -fx-fill: #000099;      /*ROXO*/
+}
+
+.string{
+    -fx-fill: #FFFF00;      /*AMARELO*/
+}
+
+.comment{
+    -fx-fill: gray;
+}

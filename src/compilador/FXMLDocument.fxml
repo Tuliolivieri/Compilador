@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import org.fxmisc.richtext.CodeArea?>
+
+<AnchorPane id="AnchorPane" prefHeight="710.0" prefWidth="1129.0" style="-fx-background-color: #999999;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compilador.FXMLDocumentController">
+   <children>
+      <Pane layoutX="14.0" layoutY="5.0" prefHeight="60.0" prefWidth="1101.0" style="-fx-background-color: #999999; -fx-border-color: #E0E0E0;">
+         <children>
+            <Pane layoutX="154.0" layoutY="5.0" prefHeight="50.0" prefWidth="101.0" style="-fx-border-color: #E0E0E0;">
+               <children>
+                  <JFXButton fx:id="btClearInput" focusTraversable="false" layoutX="14.0" layoutY="9.0" onAction="#clkClearInput" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('icones/edit-clear-list.png');" />
+                  <JFXButton fx:id="btCompilar" focusTraversable="false" layoutX="55.0" layoutY="9.0" onAction="#clkCompilar" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('icones/system-run.png');" />
+               </children>
+            </Pane>
+            <Pane layoutX="8.0" layoutY="5.0" prefHeight="50.0" prefWidth="140.0" style="-fx-border-color: #E0E0E0;">
+               <children>
+                  <JFXButton fx:id="btOpenFile" focusTraversable="false" layoutX="14.0" layoutY="9.0" onAction="#clkOpenFile" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('icones/document-open.png');" />
+                  <JFXButton fx:id="btSaveFile" buttonType="RAISED" focusTraversable="false" layoutX="94.0" layoutY="9.0" onAction="#clkSaveFile" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('icones/document-save.png');" />
+                  <JFXButton fx:id="btSaveAs" focusTraversable="false" layoutX="54.0" layoutY="9.0" onAction="#clkSaveAs" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('icones/document-save-as.png');" />
+               </children>
+            </Pane>
+            <JFXButton fx:id="btClear" focusTraversable="false" layoutX="1055.0" layoutY="14.0" onAction="#clkClear" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('icones/project-development-close.png');" />
+         </children>
+      </Pane>
+      <CodeArea fx:id="codeArea" layoutX="14.0" layoutY="71.0" onKeyReleased="#clkTeclaCodearea" prefHeight="448.0" prefWidth="1101.0" style="-fx-border-style: solid; -fx-background-color: #444444; -fx-fill: white; -fx-border-color: white; -fx-font-size: 16px;" />
+      <TabPane layoutX="14.0" layoutY="526.0" prefHeight="165.0" prefWidth="1101.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Saida do Compilador">
+            <content>
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="145.0" prefWidth="1101.0">
+                     <children>
+                        <JFXTextArea fx:id="taOutput" editable="false" focusColor="RED" labelFloat="true" layoutX="1.0" prefHeight="134.0" prefWidth="1101.0" promptText="Saída do Compilador_&gt;" style="-fx-border-style: dotted; -fx-border-color: E0E0E0;" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Tabela de Símbolos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-color: lightgray;">
+                     <children>
+                        <TableView fx:id="tbSimbolos" prefHeight="135.0" prefWidth="1101.0">
+                          <columns>
+                            <TableColumn id="colLinha" fx:id="colLinha" maxWidth="2000.0" prefWidth="200.0" text="Linha" />
+                            <TableColumn id="colToken" fx:id="colToken" prefWidth="75.0" text="Token" />
+                              <TableColumn id="colLexema" fx:id="colLexema" prefWidth="75.0" text="Lexema" />
+                              <TableColumn id="colValor" fx:id="colValor" prefWidth="75.0" text="Valor" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

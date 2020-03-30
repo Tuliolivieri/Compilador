@@ -1,0 +1,5 @@
+### LOCAIS DE ONDE FORAM RETIRADOS OS ICONES USADOS
+
+## Oxygen Icon Theme
+
+https://github.com/pasnox/oxygen-icons-png
