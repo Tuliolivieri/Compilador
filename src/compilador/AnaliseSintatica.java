@@ -588,7 +588,7 @@ public class AnaliseSintatica {
     private void cmdVar() {
         pularErrosLexicos();
         if (ling.isFirst("cmd_var", tk.getId())) {
-            tipoAtual = tk.getId(); // tipoAtual = int | double | exp
+            tipoAtual = tk.getId(); // tipoAtual = int | double
             next();
             definirVar();
             pontoVirgula();
