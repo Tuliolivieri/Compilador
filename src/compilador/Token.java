@@ -58,6 +58,7 @@ public abstract class Token {
         FRASE("frase"), 
         ENQUANTO("enquanto"),
         SE("se"),
+        PARA("para"),
         VIRGULA(","), 
         PONTO_VIRGULA(";"), 
         ABRE_PARENTESE("\\("), 
@@ -85,7 +86,6 @@ public abstract class Token {
         COMENTARIO("///(.)*(\\n)?$"), 
         NL("\\n"), 
         FIM("\\$");
-        
 
         private final String regex;
         TokenType(String regex) {

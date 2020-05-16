@@ -314,56 +314,6 @@ public class AnaliseSintatica {
         blocoComando();
     }
 
-    private void cmdFor() {
-        next();
-        boolean errocabecalho = false;
-        if (ABRE_PARENTESE.name().equals(tk.getToken())) {
-            next();
-            if (ID_VAR.name().equals(tk.getToken())) { // opcional
-                Simbolo v = tk;
-                //next();
-                Pair<String, String> res = atribuicao();
-                if (res == null) {
-                    errocabecalho = true;
-                }
-            }
-            if (!errocabecalho) {
-                if (!pontoVirgula()) {
-                    errocabecalho = true;
-                } else if (!bool()) {
-                    errocabecalho = true;
-                } else if (!pontoVirgula()) {
-                    errocabecalho = true;
-                } else {
-                    if (ID_VAR.name().equals(tk.getToken())) { // opcional
-                        //next();
-                        if (atribuicao() == null) {
-                            errocabecalho = true;
-                        }
-                    }
-                    if (!errocabecalho) {
-                        if (FECHA_PARENTESE.name().equals(tk.getToken()) || erroLexico()) {
-                            next();
-                        } else {
-                            erros.add(new Erro(tk.getLinha(), "ERRO_FOR: Esperado = ')' , Obtido = '" + tk.getId() + "'"));
-                            errocabecalho = true;
-                            pularToken();
-                        }
-                    }
-                }
-            }
-
-        } else {
-            erros.add(new Erro(tk.getLinha(), "ERRO_FOR: Esperado = '(' , Obtido = '" + tk.getId() + "'"));
-            errocabecalho = true;
-            pularToken();
-        }
-        if (errocabecalho) {
-            procurarBlocoComando();
-        }
-        blocoComando();
-
-    }
 
     private void procurarBlocoComando() {
         while (!tk.getToken().equals(ABRE_CHAVE.name())) {
@@ -460,9 +410,12 @@ public class AnaliseSintatica {
                 cmdIf();
             } else if (name.equals(ENQUANTO.name())) { // while
                 cmdWhile();
-            } else { // erro
+            } else if(name.equals(PARA.name())){ // for
+                cmdPara();
+            }
+            else{ // erro
                 erros.add(new Erro(tk.getLinha(), "ERRO_COMANDO: Esperado = "
-                        + "{'if','while','for',ID_VAR}, Obtido = '" + tk.getId() + "'"));
+                        + "{'se','enquanto','para',ID_VAR}, Obtido = '" + tk.getId() + "'"));
                 pularToken();
                 /*verificaProximoToken();
                 while (!ling.isFirst("cmd", tk.getToken()) && !tk.getToken().equals(END.name())
@@ -555,7 +508,7 @@ public class AnaliseSintatica {
             next();
         } else {
             erros.add(new Erro(tk.getLinha(), "ERRO_VALOR: Esperado = "
-                    + "{VALOR_INT, VALOR_DOUBLE, VALOR_EXP, OPERACAO_ARITMETICA}, "
+                    + "{VALOR_INT, VALOR_FLUT, VALOR_FRASE, OPERACAO_ARITMETICA}, "
                     + "Obtido = '" + tk.getId() + "'"));
             pularToken();
             return false;
@@ -627,5 +580,54 @@ public class AnaliseSintatica {
     
     public TabelaSimbolos getTabelaSimbolos() {
         return this.tabelas;
+    }
+    
+    private void cmdPara() {
+        next();
+        boolean errocabecalho = false;
+        if (ABRE_PARENTESE.name().equals(tk.getToken())) {
+            next();
+            if (ID_VAR.name().equals(tk.getToken())) { // opcional
+                Simbolo v = tk;
+                Pair<String, String> res = atribuicao();
+                if (res == null) {
+                    errocabecalho = true;
+                }
+            }
+            if (!errocabecalho) {
+                if (!pontoVirgula()) {
+                    errocabecalho = true;
+                } else if (!bool()) {
+                    errocabecalho = true;
+                } else if (!pontoVirgula()) {
+                    errocabecalho = true;
+                } else {
+                    if (ID_VAR.name().equals(tk.getToken())) {
+                        if (atribuicao() == null) {
+                            errocabecalho = true;
+                        }
+                    }
+                    if (!errocabecalho) {
+                        if (FECHA_PARENTESE.name().equals(tk.getToken()) || erroLexico()) {
+                            next();
+                        } else {
+                            erros.add(new Erro(tk.getLinha(), "ERRO_PARA: Esperado = ')' , Obtido = '" + tk.getId() + "'"));
+                            errocabecalho = true;
+                            pularToken();
+                        }
+                    }
+                }
+            }
+
+        } else {
+            erros.add(new Erro(tk.getLinha(), "ERRO_PARA: Esperado = '(' , Obtido = '" + tk.getId() + "'"));
+            errocabecalho = true;
+            pularToken();
+        }
+        if (errocabecalho) {
+            procurarBlocoComando();
+        }
+        blocoComando();
+
     }
 }

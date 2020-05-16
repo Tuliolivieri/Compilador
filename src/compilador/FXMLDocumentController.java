@@ -71,7 +71,7 @@ public class FXMLDocumentController implements Initializable {
 
     private static final String[] KEYWORDS          = {"begin","end"};
     private static final String[] KEYTYPES          = {"int", "flut", "frase"};
-    private static final String[] KEYCOMMAND        = {"se", "senao", "enquanto"};
+    private static final String[] KEYCOMMAND        = {"se", "senao", "enquanto", "para"};
     private static final String KEYWORD_PATTERN     = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
     private static final String TYPES_PATTERN       = "\\b(" + String.join("|", KEYTYPES) + ")\\b";
     private static final String COMMAND_PATTERN     = "\\b(" + String.join("|", KEYCOMMAND) + ")\\b";

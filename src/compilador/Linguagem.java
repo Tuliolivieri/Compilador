@@ -59,7 +59,7 @@ public final class Linguagem
     };
     private final String[] arrcmd = new String[]
     {
-        ENQUANTO.getRegex(), SE.getRegex(), ID_VAR.getRegex()
+        ENQUANTO.getRegex(), SE.getRegex(), PARA.getRegex(), ID_VAR.getRegex()
     };
     private final String[] arrnot = new String[]
     {
@@ -117,6 +117,10 @@ public final class Linguagem
     private final String[] arrenquanto = new String[]
     {
         ENQUANTO.getRegex()
+    };
+    private final String[] arrpara = new String[]
+    {
+        PARA.getRegex()
     };
     private final String[] arrpontovirgula = new String[]
     {
@@ -181,15 +185,15 @@ public final class Linguagem
         mapfirst.put("not", arrnot);
         mapfirst.put("cmd_while", arrenquanto);
         mapfirst.put("while", arrenquanto);
+        mapfirst.put("cmd_para", arrpara);
+        mapfirst.put("para", arrpara);
         mapfirst.put("ponto_virgula", arrpontovirgula);
         mapfirst.put("operador_aritmetico", arropari);
         mapfirst.put("atribuidor", arratribuidor);
         mapfirst.put("atribuicao", arridvar);
         mapfirst.put("operacao_aritmetica", first("valor_gen"));
-        mapfirst.put("reservado", join(first("begin"), first("end"), first("tipo_var"), arrse));
-        //mapfirst.put("operacao_aritmetica", first("valor_gen"));
-
-        //mapfirst.put("", );
+        mapfirst.put("reservado", join(first("begin"), first("end"), first("tipo_var"), arrse, arrpara, arrenquanto));
+        
         // inicializando map follow
         mapfollow = new HashMap<>(mapfirst.size());
 
@@ -226,6 +230,8 @@ public final class Linguagem
         mapfollow.put("not", arrabreparentese);
         mapfollow.put("cmd_enquanto", follow("cmd"));
         mapfollow.put("enquanto", arrabreparentese);
+        mapfollow.put("cmd_para", follow("cmd"));
+        mapfollow.put("para", arrabreparentese);
         mapfollow.put("ponto_virgula", join(first("cmd"), first("cmd_var")));
         mapfollow.put("valor", follow("valor_gen"));
         mapfollow.put("atribuidor", first("valor_gen"));
